@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel'
 import { Paper, Button } from '@mui/material'
 
-export default function carousel(props)
+export default function Example(props)
 {
     var items = [
         {
@@ -16,7 +16,7 @@ export default function carousel(props)
     ]
 
     return (
-        <Carousel autoPlay={true} indicators={true} 
+        <Carousel autoPlay={true} indicators={false} 
         swipe = {true} 
         cycleNavigation = {true}
         navButtonsAlwaysVisible = {false}

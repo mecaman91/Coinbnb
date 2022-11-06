@@ -7,12 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import LineChart from './chart'
-import MyResponsiveLine from '../example/chart'
+import Button from '@mui/material/Button';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'price', label: 'Price', minWidth: 100 },
+  { id: 'name', label: 'Name', align: 'left', minWidth: 170 },
+  { id: 'price', label: 'Price', format: (value) => value.toLocaleString('en-US'), minWidth: 100 },
   {
     id: 'change',
     label: 'Change',
@@ -21,36 +20,41 @@ const columns = [
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'market',
-    label: 'B&B Market',
+    id: 'volume',
+    label: 'volume',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'chart',
-    label: 'recent 7 days',
+    id: 'market',
+    label: 'B&B Market',
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
+    align: 'center',
+  },
+  {
+    id: 'detail',
+    label: '',
+    minWidth: 170,
+    align: 'center',
   },
 ];
 
-function createData(name, price, change, market, chart) {
-  return { name, price, change, market, chart };
+function createData(name, price, change, market, volume, detail) {
+  return { name, price, change, market, volume, detail};
 }
 
 const rows = [
-  createData('BTC', '$20,000', '+0.60%', 'Bullish'),
-  createData('ETH', '$1,613', '+3.54%', 'Bearlish'),
-  createData('USDT', '$0.99', '+0.04%', 'Bullish'),
-  createData('BNB', '$304', '+2.70%', 'Bullish'),
-  createData('XRP', '$0.46', '-0.42%', 'Bearlish'),
-  createData('BUSD', '$0.1', '+0.01%', 'Bearlish'),
-  createData('DOGE', '$0.126', '+55.11%', 'Bullish'),
-  createData('ADA', '$0.416', '+2.36%', 'Bullish'),
-  createData('SOL', '$33.11', '+0.43%', 'Bearlish'),
-  createData('MATIC', '$0.9297', '-1.27%', 'Bearlish'),
+  createData('BTC', '$20,000', '+0.60%', 'Bullish', 123123, 'detail'),
+  createData('ETH', '$1,613', '+3.54%', 'Bearlish', 456456, 'detail'),
+  createData('USDT', '$0.99', '+0.04%', 'Bullish', 798789, 'detail'),
+  createData('BNB', '$304', '+2.70%', 'Bullish', 123123, 'detail'),
+  createData('XRP', '$0.46', '-0.42%', 'Bearlish', 498462, 'detail'),
+  createData('BUSD', '$0.1', '+0.01%', 'Bearlish', 1165749, 'detail'),
+  createData('DOGE', '$0.126', '+55.11%', 'Bullish', 115681, 'detail'),
+  createData('ADA', '$0.416', '+2.36%', 'Bullish', 554982, 'detail'),
+  createData('SOL', '$33.11', '+0.43%', 'Bearlish', 222168, 'detail'),
+  createData('MATIC', '$0.9297', '-1.27%', 'Bearlish', 224978, 'detail'),
 ];
 
 export default function StickyHeadTable() {
@@ -91,17 +95,26 @@ export default function StickyHeadTable() {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
+                      if (row[column.id] == 'detail') {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            <Button variant="text">Detail</Button>
+                          </TableCell>
+                        );
+                      } else {
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </TableCell>
+                        );
+                      }
                     })}
                   </TableRow>
                 );
               })}
+              
           </TableBody>
         </Table>
       </TableContainer>

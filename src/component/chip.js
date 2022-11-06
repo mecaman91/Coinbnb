@@ -1,15 +1,30 @@
 import * as React from 'react';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
 import FaceIcon from '@mui/icons-material/Face';
 
-export default function ColorChips() {
+export default function ColorChips(props) {
+  let chipLabel = ''
+  let chipColor = 'default'
+
+  switch (props.label) {
+    case 'bull':
+      chipLabel = 'Bullish'
+      break
+    case 'bear':
+      chipLabel = 'Bearlish'
+      break
+  }
+
+  switch (props.color) {
+    case 'bull':
+      chipColor = 'success'
+      break
+    case 'bear':
+      chipColor = 'error'
+      break
+  }
+
   return (
-    <Stack spacing={1} alignItems="center">
-      <Stack direction="row" spacing={1}>
-        <Chip label="Bearlish" color="error" icon={<FaceIcon />} />
-        <Chip label="Bullish" color="success" icon={<FaceIcon />} />
-      </Stack>
-    </Stack>
+    <Chip label={chipLabel} color={chipColor} icon={<FaceIcon />} />
   );
 }
