@@ -10,6 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ColorChips from './chip'
 import ApexChart from './apexChart';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import TrendingTooltip from './trendingTooltip'
+import Box from '@mui/material/Box';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -18,6 +22,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
   '& .MuiDialogActions-root': {
     padding: theme.spacing(1),
+  },
+  '& .css-1t1j96h-MuiPaper-root-MuiDialog-paper' : {
+    minWidth: '40vw'
+  },
+  '& .css-140puxv-MuiTypography-root-MuiDialogTitle-root' : {
+    padding: '16px 0.5vw'
   },
 }));
 
@@ -50,38 +60,65 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs(props) {
-  const [open, setOpen] = React.useState(false);
+export default function DetailModal(props) {
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const tooltipMSG = `
+    Based on a well-known strategy.
+    As we mentioned, this is not a coin recommendation or something.
+    `;
+
+  const toolTipStyle = { paddingTop: '1vw'};
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={props.closeModal}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open= {true}
+        
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Market Detail
-        </BootstrapDialogTitle>
+        <Box sx={{display:'flex'}}>
+          <BootstrapDialogTitle id="customized-dialog-title" onClose={props.closeModal}>
+            Market Detail
+          </BootstrapDialogTitle>
+          <TrendingTooltip tooltipMSG = {tooltipMSG} toolTipStyle = {toolTipStyle}></TrendingTooltip>
+        </Box>
         <DialogContent dividers>
           <ApexChart></ApexChart>
-            <ColorChips label='bull' color ='bull'></ColorChips> Moving Average(MA) <ColorChips label='bear'></ColorChips>
-            <ColorChips label='bull' color ='bull'></ColorChips> Bollinger Band(BB) <ColorChips label='bear'></ColorChips>
-            <ColorChips label='bull'></ColorChips> RSI <ColorChips label='bear' color ='bear'></ColorChips>
-            <ColorChips label='bull'></ColorChips> MACD <ColorChips label='bear' color ='bear'></ColorChips>
+            <Stack direction="row"
+              justifyContent="space-evenly"
+              alignItems="center"
+              spacing={2}>
+              <Stack justifyContent="space-evenly" spacing={5}>
+                <ColorChips label='bull' color ='bull'></ColorChips>
+                <ColorChips label='bull' color ='bull'></ColorChips>
+                <ColorChips label='bull' color ='bull'></ColorChips>
+                <ColorChips label='bull' color ='bull'></ColorChips>
+              </Stack>
+              <Stack justifyContent="space-evenly" spacing={5} alignItems="center">
+                <Typography variant="subtitle1" gutterBottom>
+                  Moving Average(MA)
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Bollinger Band(BB)
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  RSI
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  MACD
+                </Typography>
+              </Stack>
+              <Stack justifyContent="space-evenly" spacing={5}>
+                <ColorChips label='bear' color ='bear'></ColorChips>
+                <ColorChips label='bear' color ='bear'></ColorChips>
+                <ColorChips label='bear' color ='bear'></ColorChips>
+                <ColorChips label='bear' color ='bear'></ColorChips>
+              </Stack>
+            </Stack>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={props.closeModal}>
             Close
           </Button>
         </DialogActions>

@@ -53,7 +53,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1,
+      overflow: 'auto',
+      width: '100vw',
+      top: 0,
+      left: 0,
+      position: 'fixed', 
+      zIndex: 1200 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography

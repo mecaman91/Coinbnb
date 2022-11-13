@@ -1,92 +1,34 @@
 import * as React from 'react';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import LineChart from './chart.js'
-import btcImage from '../image/BTC.PNG'
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Stack from '@mui/material/Stack';
 
-let lineData = [
-    {
-      "id": "japan",
-      "color": "hsl(79, 70%, 50%)",
-      "data": [
-        {
-          "x": "plane",
-          "y": 291
-        },
-        {
-          "x": "helicopter",
-          "y": 242
-        },
-        {
-          "x": "boat",
-          "y": 156
-        },
-        {
-          "x": "train",
-          "y": 150
-        },
-        {
-          "x": "subway",
-          "y": 164
-        },
-        {
-          "x": "bus",
-          "y": 187
-        },
-        {
-          "x": "car",
-          "y": 283
-        },
-        {
-          "x": "moto",
-          "y": 248
-        },
-        {
-          "x": "bicycle",
-          "y": 2
-        },
-        {
-          "x": "horse",
-          "y": 246
-        },
-        {
-          "x": "skateboard",
-          "y": 89
-        },
-        {
-          "x": "others",
-          "y": 101
-        }
-      ]
-    }
-  ]
-
-export default function CardArea() {
+export default function CoinCard(props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={btcImage}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            BTC/USDT
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            $19,166
-          </Typography>
-            <LineChart data = {lineData}></LineChart>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          BTC/BUSD
+        </Typography>
+        <Typography variant="h5" component="div">
+          $20,000
+        </Typography>
+        <Stack direction="row">
+            <ArrowDropUpIcon></ArrowDropUpIcon> 
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                +0.60%
+            </Typography>
+        </Stack>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
     </Card>
   );
 }

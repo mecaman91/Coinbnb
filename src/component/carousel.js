@@ -1,8 +1,9 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel'
 import { Paper, Button } from '@mui/material'
+import CoinCard from './card'
 
-export default function Example(props)
+export default function TrendingCarousel(props)
 {
     var items = [
         {
@@ -23,9 +24,7 @@ export default function Example(props)
         fullHeightHover= {true}
         animation = 'slide'
         duration = {500}>
-            {
-                items.map( (item, i) => <Item key={i} item={item} /> )
-            }
+            <CoinCard></CoinCard>
 
         </Carousel>
     )

@@ -8,6 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
+import TableFooter from '@mui/material/TableFooter';
 
 const columns = [
   { id: 'name', label: 'Name', align: 'left', minWidth: 170 },
@@ -57,10 +59,9 @@ const rows = [
   createData('MATIC', '$0.9297', '-1.27%', 'Bearlish', 224978, 'detail'),
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -72,7 +73,7 @@ export default function StickyHeadTable() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: '55vh' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -98,7 +99,7 @@ export default function StickyHeadTable() {
                       if (row[column.id] == 'detail') {
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            <Button variant="text">Detail</Button>
+                            <Button variant="text" onClick={props.openModal}>Detail</Button>
                           </TableCell>
                         );
                       } else {
@@ -114,9 +115,9 @@ export default function StickyHeadTable() {
                   </TableRow>
                 );
               })}
-              
           </TableBody>
         </Table>
+        
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
